@@ -2,7 +2,17 @@ const { Conversion } = require('../../db/schemas');
 const { translateSentence } = require('../../helpers/pigLatinTranslator');
 
 module.exports = {
-  get: () => {},
+  get: (callback) => {
+    Conversion.findAll()
+    .then((res) => {
+      console.log('successfully retrieved db records');
+      callback(null, res);
+    })
+    .catch((err) => {
+      console.log('error retrieving db records,', err);
+      callback(err, null);
+    });
+  },
   post: (input, callback) => {
     Conversion.create({
       input: input,
@@ -10,7 +20,6 @@ module.exports = {
     })
     .then((res) => {
       console.log('successfully created db record');
-      console.log('results from create', res);
       callback(null, res);
     })
     .catch((err) => {
