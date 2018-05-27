@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack -w",
     "build_db": "node db/config/index.js",
-    "start": "node server/index.js",
+    "start": "nodemon server/index.js",
     "sync_db": "node db/schemas/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
