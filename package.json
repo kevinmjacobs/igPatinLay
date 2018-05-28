@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/kevinmjacobs/igPatinLay#readme",
   "dependencies": {
+    "axios": "^0.18.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",

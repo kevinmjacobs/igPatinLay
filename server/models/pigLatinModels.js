@@ -1,5 +1,4 @@
 const { Conversion } = require('../../db/schemas');
-const { translateSentence } = require('../../helpers/pigLatinTranslator');
 
 module.exports = {
   get: (callback) => {
@@ -13,10 +12,10 @@ module.exports = {
       callback(err, null);
     });
   },
-  post: (input, callback) => {
+  post: (input, output, callback) => {
     Conversion.create({
       input: input,
-      output: translateSentence(input)
+      output: output
     })
     .then((res) => {
       console.log('successfully created db record');
