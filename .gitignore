@@ -61,4 +61,4 @@ typings/
 .next
 
 # other
-bundle.js
+static/bundle.js
