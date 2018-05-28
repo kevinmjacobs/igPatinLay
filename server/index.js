@@ -1,4 +1,5 @@
 const express = require('express');
+const session = require('express-session');
 const path = require('path');
 const parser = require('body-parser');
 const helmet = require('helmet');
@@ -9,6 +10,10 @@ const app = express();
 const PORT = 3000;
 
 app.use(helmet());
+app.use(session({
+  secret: 'shhhhhhh'
+}))
+
 app.use(parser.json());
 app.use(parser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../static')));

@@ -1,6 +1,7 @@
 import React from 'react';
 import Conversion from '../components/Conversion.jsx';
 import { Saved } from '../components/Saved.jsx'
+import Login from '../components/Login.jsx';
 import axios from 'axios';
 import { translateSentence } from '../../helpers/pigLatinTranslator';
 
@@ -8,6 +9,7 @@ export default class App extends React.Component {
   constructor() {
     super();
     this.state = {
+      loggedIn: false,
       term: '',
       conversions: [],
       option: 'Main',
@@ -16,6 +18,7 @@ export default class App extends React.Component {
     this.handleInput = this.handleInput.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleOptionChange = this.handleOptionChange.bind(this);
+    this.isLoggedIn = this.isLoggedIn.bind(this);
   }
 
   componentDidMount() {
@@ -64,62 +67,78 @@ export default class App extends React.Component {
     .catch((err) => console.log('error with axios get request', err));
   }
 
+  isLoggedIn() {
+    this.setState({
+      loggedIn: true
+    })
+  }
+
   render() {
-    if (this.state.option === 'Main') {
+    if (!this.state.loggedIn) {
       return (
         <div>
-          <div id="radios">
-            <label><input type="radio" value="Main" checked={this.state.option === 'Main'} onChange={this.handleOptionChange}/>Main</label>
-            <label><input type="radio" value="Saved" checked={this.state.option === 'Saved'} onChange={this.handleOptionChange}/>Top 10 Saved</label>
-            <label><input type="radio" value="User" checked={this.state.option === 'User'} onChange={this.handleOptionChange}/>User</label>
-          </div>
-          <br />
-          <div id="search">
-            <span>Enter a sentence to be translated!<br/></span>
-            <input onKeyUp={this.handleInput}/>
-            <button onClick={this.handleClick}>Convert</button>
-          </div>
-          <div id="conversions">
-            {this.state.conversions.map((conversion, index) => {
-              return <Conversion conversion={conversion} index={index}/>
-            })}
-          </div>
+          <Login isLoggedIn={this.isLoggedIn}/>
         </div>
       )
-    } else if (this.state.option === 'Saved') {
-      return (
-        <div>
-          <div id="radios">
-            <label><input type="radio" value="Main" checked={this.state.option === 'Main'} onChange={this.handleOptionChange}/>Main</label>
-            <label><input type="radio" value="Saved" checked={this.state.option === 'Saved'} onChange={this.handleOptionChange}/>Top 10 Saved</label>
-            <label><input type="radio" value="User" checked={this.state.option === 'User'} onChange={this.handleOptionChange}/>User</label>
-          </div>
-          <br />
-          <table id="saved">
-            <thead>
-              <tr>
-                <th>Output</th>
-                <th>Total Saved</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.state.saved.map((save, index) => {
-                return <Saved output={save.output} total={save.totalSaved} index={index}/>
-              })}
-            </tbody>
-          </table>
-        </div>
-      )
-    } else {
-      return (
-        <div>
+    }
+    else {
+      if (this.state.option === 'Main') {
+        return (
           <div>
-            <label><input type="radio" value="Main" checked={this.state.option === 'Main'} onChange={this.handleOptionChange}/>Main</label>
-            <label><input type="radio" value="Saved" checked={this.state.option === 'Saved'} onChange={this.handleOptionChange}/>Top 10 Saved</label>
-            <label><input type="radio" value="User" checked={this.state.option === 'User'} onChange={this.handleOptionChange}/>User</label>
+            <div id="radios">
+              <label><input type="radio" value="Main" checked={this.state.option === 'Main'} onChange={this.handleOptionChange}/>Main</label>
+              <label><input type="radio" value="Saved" checked={this.state.option === 'Saved'} onChange={this.handleOptionChange}/>Top 10 Saved</label>
+              <label><input type="radio" value="User" checked={this.state.option === 'User'} onChange={this.handleOptionChange}/>User</label>
+            </div>
+            <br />
+            <div id="search">
+              <span>Enter a sentence to be translated!<br/></span>
+              <input onKeyUp={this.handleInput}/>
+              <button onClick={this.handleClick}>Convert</button>
+            </div>
+            <div id="conversions">
+              {this.state.conversions.map((conversion, index) => {
+                return <Conversion conversion={conversion} index={index}/>
+              })}
+            </div>
           </div>
-        </div>
-      )
+        )
+      } else if (this.state.option === 'Saved') {
+        return (
+          <div>
+            <div id="radios">
+              <label><input type="radio" value="Main" checked={this.state.option === 'Main'} onChange={this.handleOptionChange}/>Main</label>
+              <label><input type="radio" value="Saved" checked={this.state.option === 'Saved'} onChange={this.handleOptionChange}/>Top 10 Saved</label>
+              <label><input type="radio" value="User" checked={this.state.option === 'User'} onChange={this.handleOptionChange}/>User</label>
+            </div>
+            <br />
+            <table id="saved">
+              <thead>
+                <tr>
+                  <th>Output</th>
+                  <th>Total Saved</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.saved.map((save, index) => {
+                  return <Saved output={save.output} total={save.totalSaved} index={index}/>
+                })}
+              </tbody>
+            </table>
+          </div>
+        )
+      } else {
+        return (
+          <div>
+            <div>
+              <label><input type="radio" value="Main" checked={this.state.option === 'Main'} onChange={this.handleOptionChange}/>Main</label>
+              <label><input type="radio" value="Saved" checked={this.state.option === 'Saved'} onChange={this.handleOptionChange}/>Top 10 Saved</label>
+              <label><input type="radio" value="User" checked={this.state.option === 'User'} onChange={this.handleOptionChange}/>User</label>
+            </div>
+          </div>
+        )
+      }
+
     }
 
   }
