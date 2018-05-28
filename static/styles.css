@@ -22,3 +22,9 @@ button#logout {
   top: 5px;
   right: 5px;
 }
+
+button#signup {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}

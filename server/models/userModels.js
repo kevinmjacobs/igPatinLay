@@ -24,18 +24,21 @@ module.exports = {
       callback(err, null);
     });
   },
-  post: (input, output, callback) => {
-    Conversion.create({
-      input: input,
-      output: output
+  post: (username, password, callback) => {
+    User.findOrCreate({
+      where: {
+        username: username,
+        password: password
+      }
     })
-    .then((res) => {
-      console.log('successfully created db record');
-      callback(null, res);
+    .spread((res, created) => {
+      console.log('results of find or create', res._options);
+      console.log('created of find or create', created);
+      callback(null, res, created);
     })
     .catch((err) => {
       console.log('error created db record,', err);
-      callback(err, null);
+      callback(err, null, null);
     });
   }
 }

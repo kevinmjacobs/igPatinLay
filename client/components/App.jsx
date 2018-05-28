@@ -118,7 +118,7 @@ export default class App extends React.Component {
       } else if (this.state.option === 'Saved') {
         return (
           <div>
-            <button id="logout">Logout</button>
+            <button id="logout" onClick={() => this.logout()}>Logout</button>
             <div id="radios">
               <label><input type="radio" value="Main" checked={this.state.option === 'Main'} onChange={this.handleOptionChange}/>Main</label>
               <label><input type="radio" value="Saved" checked={this.state.option === 'Saved'} onChange={this.handleOptionChange}/>Top 10 Saved</label>
@@ -143,7 +143,7 @@ export default class App extends React.Component {
       } else {
         return (
           <div>
-            <button id="logout">Logout</button>
+            <button id="logout" onClick={() => this.logout()}>Logout</button>
             <div>
               <label><input type="radio" value="Main" checked={this.state.option === 'Main'} onChange={this.handleOptionChange}/>Main</label>
               <label><input type="radio" value="Saved" checked={this.state.option === 'Saved'} onChange={this.handleOptionChange}/>Top 10 Saved</label>

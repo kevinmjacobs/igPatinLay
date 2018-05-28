@@ -6,7 +6,7 @@ router.get('/convert', pigLatinController.get);
 router.post('/convert', pigLatinController.post);
 
 router.get('/user', userController.get);
-router.post('/user');
+router.post('/user', userController.post);
 
 module.exports = {
   router: router

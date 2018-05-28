@@ -1,19 +1,17 @@
 import React from 'react';
 import axios from 'axios';
 
-import Signup from './Signup.jsx';
+import App from './App.jsx';
 
-export default class Login extends React.Component {
+export default class Signup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       username: '',
       password: '',
-      signUp: false
+      signedUp: false
     };
     this.handleInput = this.handleInput.bind(this);
-    this.isLoggedIn = props.isLoggedIn;
-    this.signup = this.signup.bind(this);
   }
 
   handleInput(e) {
@@ -23,40 +21,31 @@ export default class Login extends React.Component {
   }
 
   handleSubmit(e, cb) {
-    axios.get('/api/user', {
-      params: {
-        username: this.state.username,
-        password: this.state.password
-      }
+    axios.post('/api/user', {
+      username: this.state.username,
+      password: this.state.password
     })
     .then(res => {
-      if (res.data) {
-        this.isLoggedIn();
-      }
+      console.log('axios post user successful');
+      this.setState({
+        signedUp: true
+      });
     })
-    .catch((err) => console.log('error making axios get user request', err));
-  }
-
-  signup() {
-    this.setState({
-      signUp: true
-    }, () => {
-      this.render()
-    })
+    .catch(err => console.log('error making axios post user,', err));
   }
 
   render() {
-    if (this.state.signUp) {
+    if (this.state.signedUp) {
       return (
         <div>
-          <Signup />
+          <App />
         </div>
       )
     } else {
       return (
         <div>
           <h4>
-            Login
+            Signup
           </h4>
           <div>
             User Name:<input type="text" name="username" onKeyUp={this.handleInput}/>
@@ -68,4 +57,5 @@ export default class Login extends React.Component {
       )
     }
   }
+
 }
