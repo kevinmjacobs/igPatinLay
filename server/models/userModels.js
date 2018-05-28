@@ -12,11 +12,11 @@ module.exports = {
     })
     .then((res) => {
       if (res) {
-        console.log('user/password matches');
-        callback(null, true);
+        console.log('user/password matches:', res);
+        callback(null, res);
       } else {
         console.log('user/password incorrect');
-        callback(null, false);
+        callback(null, res);
       }
     })
     .catch((err) => {

@@ -3,14 +3,16 @@ const userModel = require('../models/userModels');
 const userController = {
   get: ((req, res) => {
     console.log(req.query);
-    userModel.get(req.query.username, req.query.password, (err, results) => {
+    userModel.get(req.query.username, req.query.password, (err, result) => {
       if (err) {
         console.log('error getting data', err);
         res.status(400).send(err.message);
-      } else {
-        console.log('GET request successful');
-        res.status(200).send(results);
       }
+      console.log('GET request successful', result);
+      if (result) {
+        req.session.username = result.dataValues.username;
+      }
+      res.status(200).send(result);
     })
   }),
   post: ((req, res) => {

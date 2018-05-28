@@ -19,9 +19,17 @@ export default class Login extends React.Component {
   }
 
   handleSubmit(e, cb) {
-    e.preventDefault();
-    axios.get(`/api/user?username=${this.state.username}&password=${this.state.password}`)
-    .then((res) => console.log('axios get user successful,',res))
+    axios.get('/api/user', {
+      params: {
+        username: this.state.username,
+        password: this.state.password
+      }
+    })
+    .then(res => {
+      if (res.data) {
+        this.isLoggedIn();
+      }
+    })
     .catch((err) => console.log('error making axios get user request', err));
   }
 
@@ -36,6 +44,7 @@ export default class Login extends React.Component {
           Password:<input type="text" name="password" onKeyUp={this.handleInput}/>
           <button onClick={(e) => this.handleSubmit(e, this.isLoggedIn)}>Submit</button>
         </div>
+        <div></div>
       </div>
     )
   }
