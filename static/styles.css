@@ -1,3 +1,17 @@
-head, body {
-  background-color: blue
+body {
+  background-color: lemonchiffon;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: center
+}
+
+label {
+  padding-right: 10px;
+}
+
+table#saved {
+  margin-left: 30%
+}
+
+td.output {
+  text-align: left
 }

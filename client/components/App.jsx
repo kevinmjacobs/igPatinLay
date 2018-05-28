@@ -68,16 +68,18 @@ export default class App extends React.Component {
     if (this.state.option === 'Main') {
       return (
         <div>
-          <div>
+          <div id="radios">
             <label><input type="radio" value="Main" checked={this.state.option === 'Main'} onChange={this.handleOptionChange}/>Main</label>
             <label><input type="radio" value="Saved" checked={this.state.option === 'Saved'} onChange={this.handleOptionChange}/>Saved</label>
             <label><input type="radio" value="User" checked={this.state.option === 'User'} onChange={this.handleOptionChange}/>User</label>
           </div>
           <br />
-          <span>Enter a sentence to be translated!<br/></span>
-          <input onKeyUp={this.handleInput}/>
-          <button onClick={this.handleClick}>Convert</button>
-          <div>
+          <div id="search">
+            <span>Enter a sentence to be translated!<br/></span>
+            <input onKeyUp={this.handleInput}/>
+            <button onClick={this.handleClick}>Convert</button>
+          </div>
+          <div id="conversions">
             {this.state.conversions.map((conversion, index) => {
               return <Conversion conversion={conversion} index={index}/>
             })}
@@ -87,13 +89,13 @@ export default class App extends React.Component {
     } else if (this.state.option === 'Saved') {
       return (
         <div>
-          <div>
+          <div id="radios">
             <label><input type="radio" value="Main" checked={this.state.option === 'Main'} onChange={this.handleOptionChange}/>Main</label>
             <label><input type="radio" value="Saved" checked={this.state.option === 'Saved'} onChange={this.handleOptionChange}/>Saved</label>
             <label><input type="radio" value="User" checked={this.state.option === 'User'} onChange={this.handleOptionChange}/>User</label>
           </div>
           <br />
-          <table>
+          <table id="saved">
             <thead>
               <tr>
                 <th>Output</th>
