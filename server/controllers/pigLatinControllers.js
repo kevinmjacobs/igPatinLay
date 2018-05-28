@@ -13,13 +13,14 @@ const pigLatinController = {
     })
   }),
   post: ((req, res) => {
-    pigLatinModel.post(req.body.input, req.body.output, (err, results) => {
+    console.log(req.session);
+    pigLatinModel.post(req.body.input, req.body.output, req.session.username, (err, results) => {
       if (err) {
         console.log('error posting data', err);
         res.status(304).send(err.message);
       } else {
         console.log('POST request successful');
-        res.status(201).send(results);
+        res.status(201).send();
       }
     })
   })

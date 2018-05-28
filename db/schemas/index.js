@@ -28,6 +28,9 @@ const User = connection.define('user', {
   timestamps: false
 });
 
+Conversion.belongsToMany(User, { through: 'user_conversions' } );
+User.belongsToMany(Conversion, { through: 'user_conversions' } );
+
 connection.sync()
   .then(() => console.log('Schema synced to db'))
   .catch((err) => console.log('Error syncing tables,', err));
