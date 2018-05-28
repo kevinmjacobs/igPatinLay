@@ -16,3 +16,9 @@ table#saved {
 td.output {
   text-align: left
 }
+
+button#logout {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}

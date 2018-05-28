@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 export default class Login extends React.Component {
   constructor(props) {
@@ -19,17 +20,22 @@ export default class Login extends React.Component {
 
   handleSubmit(e, cb) {
     e.preventDefault();
-    console.log(e.target);
-    cb();
+    axios.get(`/api/user?username=${this.state.username}&password=${this.state.password}`)
+    .then((res) => console.log('axios get user successful,',res))
+    .catch((err) => console.log('error making axios get user request', err));
   }
 
   render() {
     return (
       <div>
-        Login
-        User Name:<input type="text" name="username" onKeyUp={this.handleInput}/>
-        Passowrd:<input type="text" name="password" onKeyUp={this.handleInput}/>
-        <button onClick={(e) => this.handleSubmit(e, this.isLoggedIn)}>Submit</button>
+        <h4>
+          Login
+        </h4>
+        <div>
+          User Name:<input type="text" name="username" onKeyUp={this.handleInput}/>
+          Password:<input type="text" name="password" onKeyUp={this.handleInput}/>
+          <button onClick={(e) => this.handleSubmit(e, this.isLoggedIn)}>Submit</button>
+        </div>
       </div>
     )
   }

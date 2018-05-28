@@ -1,4 +1,5 @@
 import React from 'react';
+// import ReactDOM from 'react-dom';
 import Conversion from '../components/Conversion.jsx';
 import { Saved } from '../components/Saved.jsx'
 import Login from '../components/Login.jsx';
@@ -19,6 +20,8 @@ export default class App extends React.Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleOptionChange = this.handleOptionChange.bind(this);
     this.isLoggedIn = this.isLoggedIn.bind(this);
+    this.logout = this.logout.bind(this);
+    this.render = this.render.bind(this);
   }
 
   componentDidMount() {
@@ -73,6 +76,14 @@ export default class App extends React.Component {
     })
   }
 
+  logout() {
+    this.setState({
+      loggedIn: false
+    }, () => {
+      this.render()
+    })
+  }
+
   render() {
     if (!this.state.loggedIn) {
       return (
@@ -85,6 +96,7 @@ export default class App extends React.Component {
       if (this.state.option === 'Main') {
         return (
           <div>
+            <button id="logout" onClick={() => this.logout()}>Logout</button>
             <div id="radios">
               <label><input type="radio" value="Main" checked={this.state.option === 'Main'} onChange={this.handleOptionChange}/>Main</label>
               <label><input type="radio" value="Saved" checked={this.state.option === 'Saved'} onChange={this.handleOptionChange}/>Top 10 Saved</label>
@@ -106,6 +118,7 @@ export default class App extends React.Component {
       } else if (this.state.option === 'Saved') {
         return (
           <div>
+            <button id="logout">Logout</button>
             <div id="radios">
               <label><input type="radio" value="Main" checked={this.state.option === 'Main'} onChange={this.handleOptionChange}/>Main</label>
               <label><input type="radio" value="Saved" checked={this.state.option === 'Saved'} onChange={this.handleOptionChange}/>Top 10 Saved</label>
@@ -130,6 +143,7 @@ export default class App extends React.Component {
       } else {
         return (
           <div>
+            <button id="logout">Logout</button>
             <div>
               <label><input type="radio" value="Main" checked={this.state.option === 'Main'} onChange={this.handleOptionChange}/>Main</label>
               <label><input type="radio" value="Saved" checked={this.state.option === 'Saved'} onChange={this.handleOptionChange}/>Top 10 Saved</label>
