@@ -3,6 +3,7 @@ import React from 'react';
 import Conversion from '../components/Conversion.jsx';
 import { Saved } from '../components/Saved.jsx'
 import Login from '../components/Login.jsx';
+import UserList from '../components/UserList';
 import axios from 'axios';
 import { translateSentence } from '../../helpers/pigLatinTranslator';
 
@@ -14,7 +15,8 @@ export default class App extends React.Component {
       term: '',
       conversions: [],
       option: 'Main',
-      saved: []
+      saved: [],
+      userList: []
     };
     this.handleInput = this.handleInput.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -26,6 +28,7 @@ export default class App extends React.Component {
 
   componentDidMount() {
     this.fetchSaved();
+    this.fetchUserList();
   }
 
   //on type update term
@@ -56,7 +59,16 @@ export default class App extends React.Component {
   handleOptionChange(e) {
     this.setState({
       option: e.target.value
-    }, () => this.fetchSaved())
+    }, () => {
+      if (this.state.option === 'Saved') {
+        console.log('switched to saved view');
+        this.fetchSaved();
+      }
+      if (this.state.option === 'User') {
+        console.log('switched to user view');
+        this.fetchUserList();
+      }
+    })
   }
 
   fetchSaved() {
@@ -65,6 +77,17 @@ export default class App extends React.Component {
       console.log('axios fetch saved successful');
       this.setState({
         saved: res.data 
+      })
+    })
+    .catch((err) => console.log('error with axios get request', err));
+  }
+
+  fetchUserList() {
+    axios.get('/api/userList')
+    .then((res) => {
+      console.log('axios fetch user list successful');
+      this.setState({
+        userList: res.data 
       })
     })
     .catch((err) => console.log('error with axios get request', err));
@@ -138,6 +161,19 @@ export default class App extends React.Component {
                 })}
               </tbody>
             </table>
+          </div>
+        )
+      } if (this.state.option === 'User') {
+        return (
+          <div>
+            <button id="logout" onClick={() => this.logout()}>Logout</button>
+            <div id="radios">
+              <label><input type="radio" value="Main" checked={this.state.option === 'Main'} onChange={this.handleOptionChange}/>Main</label>
+              <label><input type="radio" value="Saved" checked={this.state.option === 'Saved'} onChange={this.handleOptionChange}/>Top 10 Saved</label>
+              <label><input type="radio" value="User" checked={this.state.option === 'User'} onChange={this.handleOptionChange}/>User</label>
+            </div>
+            <br />
+            <UserList userList={this.state.userList}/>
           </div>
         )
       } else {

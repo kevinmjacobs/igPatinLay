@@ -2,13 +2,13 @@ const userModel = require('../models/userModels');
 
 const userController = {
   get: ((req, res) => {
-    console.log(req.query);
     userModel.get(req.query.username, req.query.password, (err, result) => {
       if (err) {
         console.log('error getting data', err);
         res.status(400).send(err.message);
       }
-      console.log('GET request successful', result);
+      console.log('GET request successful');
+      console.log(result.dataValues);
       if (result) {
         req.session.username = result.dataValues.username;
       }
@@ -16,7 +16,6 @@ const userController = {
     })
   }),
   post: ((req, res) => {
-    console.log(req.body);
     userModel.post(req.body.username, req.body.password, (err, results, created) => {
       if (err) {
         console.log('error posting data', err);
