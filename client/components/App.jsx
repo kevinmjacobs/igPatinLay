@@ -70,7 +70,7 @@ export default class App extends React.Component {
         <div>
           <div id="radios">
             <label><input type="radio" value="Main" checked={this.state.option === 'Main'} onChange={this.handleOptionChange}/>Main</label>
-            <label><input type="radio" value="Saved" checked={this.state.option === 'Saved'} onChange={this.handleOptionChange}/>Saved</label>
+            <label><input type="radio" value="Saved" checked={this.state.option === 'Saved'} onChange={this.handleOptionChange}/>Top 10 Saved</label>
             <label><input type="radio" value="User" checked={this.state.option === 'User'} onChange={this.handleOptionChange}/>User</label>
           </div>
           <br />
@@ -91,7 +91,7 @@ export default class App extends React.Component {
         <div>
           <div id="radios">
             <label><input type="radio" value="Main" checked={this.state.option === 'Main'} onChange={this.handleOptionChange}/>Main</label>
-            <label><input type="radio" value="Saved" checked={this.state.option === 'Saved'} onChange={this.handleOptionChange}/>Saved</label>
+            <label><input type="radio" value="Saved" checked={this.state.option === 'Saved'} onChange={this.handleOptionChange}/>Top 10 Saved</label>
             <label><input type="radio" value="User" checked={this.state.option === 'User'} onChange={this.handleOptionChange}/>User</label>
           </div>
           <br />
@@ -115,7 +115,7 @@ export default class App extends React.Component {
         <div>
           <div>
             <label><input type="radio" value="Main" checked={this.state.option === 'Main'} onChange={this.handleOptionChange}/>Main</label>
-            <label><input type="radio" value="Saved" checked={this.state.option === 'Saved'} onChange={this.handleOptionChange}/>Saved</label>
+            <label><input type="radio" value="Saved" checked={this.state.option === 'Saved'} onChange={this.handleOptionChange}/>Top 10 Saved</label>
             <label><input type="radio" value="User" checked={this.state.option === 'User'} onChange={this.handleOptionChange}/>User</label>
           </div>
         </div>
