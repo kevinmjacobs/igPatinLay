@@ -1,10 +1,12 @@
 const { Conversion } = require('../../db/schemas');
+const { connection } = require('../../db/config');
+const Sequelize = require('sequelize');
 
 module.exports = {
   get: (callback) => {
-    Conversion.findAll()
-    .then((res) => {
-      console.log('successfully retrieved db records');
+    connection.query('select output, count(id) as totalSaved from conversions group by 1 order by 2 desc LIMIT 10;')
+    .spread((res, data) => {
+      console.log('query successful')
       callback(null, res);
     })
     .catch((err) => {

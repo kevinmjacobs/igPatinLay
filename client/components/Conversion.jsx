@@ -11,7 +11,6 @@ export default class Conversion extends React.Component {
     };
   }
   save() {
-    console.log('button clicked');
     this.setState({
       saved: true
     });

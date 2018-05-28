@@ -1,20 +1,14 @@
 import React from 'react';
 
-export default class Saved extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      saved: []
-    }
-  }
+const Saved = (props) =>  {
+  return(
+    <tr>
+      <td class="output">{props.output}</td>
+      <td class="total">{props.total}</td>
+    </tr>
+  )
+}
 
-  render() {
-    return(
-      <div>
-        {this.state.saved}
-      </div>
-    )
-  }
-
-
+module.exports = {
+  Saved: Saved
 }

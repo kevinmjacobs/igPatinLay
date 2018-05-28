@@ -4,10 +4,10 @@ const pigLatinController = {
   get: ((req, res) => {
     pigLatinModel.get((err, results) => {
       if (err) {
-        console.log('error posting data', err);
+        console.log('error getting data', err);
         res.status(400).send(err.message);
       } else {
-        console.log('successfully posted');
+        console.log('GET request successful');
         res.status(200).send(results);
       }
     })
@@ -18,7 +18,7 @@ const pigLatinController = {
         console.log('error posting data', err);
         res.status(304).send(err.message);
       } else {
-        console.log('successfully posted');
+        console.log('POST request successful');
         res.status(201).send(results);
       }
     })
